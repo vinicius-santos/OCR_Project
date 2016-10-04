@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="marvin/framework/marvin_1.5.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Java/Simple-Android-OCR-master/Simple-Android-OCR-master/android-support-4.0.jar/android-support-4.0.jar"/>
+	<classpathentry kind="src" path="jar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

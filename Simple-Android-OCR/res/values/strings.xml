@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, DatumDroidOCRActivity!</string>
+    <string name="app_name">OCR_APP</string>
+    <string name="button_text">Pressione aqui para capturar uma imagem</string>
+    <string name="text_hint"></string>
+    <string name="radio_BlackWhite">Imagem preto e branco</string>
+    <string name="radio_Colored">Imagem colorida</string>
+    
+
+</resources>
