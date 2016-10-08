@@ -52,6 +52,9 @@ public class OCRActivity extends Activity {
 	public static final String linguagem = "cocacola";
 	private static final String TAG = "SimpleAndroidOCR.java";
 	public static final String lang = "eng";
+	public static final String tang = "tang";
+	public static final String por = "por";
+	public static final String aveia = "aveia";
 	public static final String lang2 = "cocacola";
 	protected Button _botao;
 	protected EditText _campo;
@@ -123,7 +126,88 @@ public class OCRActivity extends Activity {
 		
 		createDirectory(paths);
 		
+		//fonte com treinamento do por
+		if (!(new File(CAMINHO_DADOS + "tessdata/" + por + ".traineddata")).exists()) {
+            try {
 
+                AssetManager assetManager = getAssets();
+                InputStream in = assetManager.open("tessdata/por.traineddata");
+                //GZIPInputStream gin = new GZIPInputStream(in);
+                OutputStream out = new FileOutputStream(CAMINHO_DADOS
+                        + "tessdata/por.traineddata");
+
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                //while ((lenf = gin.read(buff)) > 0) {
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                //gin.close();
+                out.close();
+
+                Log.v(TAG, "Copied " + por + " traineddata");
+            } catch (IOException e) {
+                Log.e(TAG, "Was unable to copy " + por + " traineddata " + e.toString());
+            }
+        }
+		
+		
+		//fonte com treinamento do aveia
+				if (!(new File(CAMINHO_DADOS + "tessdata/" + aveia + ".traineddata")).exists()) {
+		            try {
+
+		                AssetManager assetManager = getAssets();
+		                InputStream in = assetManager.open("tessdata/aveia.traineddata");
+		                //GZIPInputStream gin = new GZIPInputStream(in);
+		                OutputStream out = new FileOutputStream(CAMINHO_DADOS
+		                        + "tessdata/aveia.traineddata");
+
+		                // Transfer bytes from in to out
+		                byte[] buf = new byte[1024];
+		                int len;
+		                //while ((lenf = gin.read(buff)) > 0) {
+		                while ((len = in.read(buf)) > 0) {
+		                    out.write(buf, 0, len);
+		                }
+		                in.close();
+		                //gin.close();
+		                out.close();
+
+		                Log.v(TAG, "Copied " + aveia + " traineddata");
+		            } catch (IOException e) {
+		                Log.e(TAG, "Was unable to copy " + aveia + " traineddata " + e.toString());
+		            }
+		        }
+		
+		//fonte com treinamento do formato da letra tang
+		if (!(new File(CAMINHO_DADOS + "tessdata/" + tang + ".traineddata")).exists()) {
+            try {
+
+                AssetManager assetManager = getAssets();
+                InputStream in = assetManager.open("tessdata/tang.traineddata");
+                //GZIPInputStream gin = new GZIPInputStream(in);
+                OutputStream out = new FileOutputStream(CAMINHO_DADOS
+                        + "tessdata/tang.traineddata");
+
+                // Transfer bytes from in to out
+                byte[] buf = new byte[1024];
+                int len;
+                //while ((lenf = gin.read(buff)) > 0) {
+                while ((len = in.read(buf)) > 0) {
+                    out.write(buf, 0, len);
+                }
+                in.close();
+                //gin.close();
+                out.close();
+
+                Log.v(TAG, "Copied " + tang + " traineddata");
+            } catch (IOException e) {
+                Log.e(TAG, "Was unable to copy " + tang + " traineddata " + e.toString());
+            }
+        }
+		
 		
 		//fonte com treinamento do formato da letra coca cola
 		if (!(new File(CAMINHO_DADOS + "tessdata/" + lang2 + ".traineddata")).exists()) {
@@ -549,7 +633,7 @@ public class OCRActivity extends Activity {
 		
 		image = Imgcodecs.imread(_caminho);
 		SaveImageUtil.save(bitmap, this);
-//		bitmap = ImageTreatmentUtil.resize(bitmap, 1200, 2400);
+//		bitmap = ImageTreatmentUtil.resize(bitmap, 2550, 3300);
 //		bitmap.setDensity(300);
 		//bitmap.setDensity(500);
 		//bitmap = ImageTreatmentUtil.resize(bitmap, 1517, 2700);
