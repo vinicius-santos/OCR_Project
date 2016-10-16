@@ -56,6 +56,7 @@ public class OCRActivity extends Activity {
 	public static final String por = "por";
 	public static final String aveia = "aveia";
 	public static final String lang2 = "cocacola";
+	public static final String digital = "digital";
 	protected Button _botao;
 	protected EditText _campo;
 	protected String _caminho;
@@ -125,6 +126,34 @@ public class OCRActivity extends Activity {
 				CAMINHO_DADOS + "tessdata/" };
 		
 		createDirectory(paths);
+		
+		//fonte com treinamento do digital
+				if (!(new File(CAMINHO_DADOS + "tessdata/" + digital + ".traineddata")).exists()) {
+		            try {
+
+		                AssetManager assetManager = getAssets();
+		                InputStream in = assetManager.open("tessdata/digital.traineddata");
+		                //GZIPInputStream gin = new GZIPInputStream(in);
+		                OutputStream out = new FileOutputStream(CAMINHO_DADOS
+		                        + "tessdata/digital.traineddata");
+
+		                // Transfer bytes from in to out
+		                byte[] buf = new byte[1024];
+		                int len;
+		                //while ((lenf = gin.read(buff)) > 0) {
+		                while ((len = in.read(buf)) > 0) {
+		                    out.write(buf, 0, len);
+		                }
+		                in.close();
+		                //gin.close();
+		                out.close();
+
+		                Log.v(TAG, "Copied " + digital + " traineddata");
+		            } catch (IOException e) {
+		                Log.e(TAG, "Was unable to copy " + digital + " traineddata " + e.toString());
+		            }
+		        }
+		
 		
 		//fonte com treinamento do por
 		if (!(new File(CAMINHO_DADOS + "tessdata/" + por + ".traineddata")).exists()) {
@@ -629,15 +658,14 @@ public class OCRActivity extends Activity {
 	private String ocr(Bitmap bitmap) {
 		checkWriteExternalPermission();
 		
-		
-		
-		image = Imgcodecs.imread(_caminho);
+//		//teste
+//		String photoPath = Environment.getExternalStorageDirectory()+"/Figura54.png";
+//		BitmapFactory.Options options = new BitmapFactory.Options();
+//		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//		Bitmap bitma = BitmapFactory.decodeFile(photoPath, options);
+//		image = Imgcodecs.imread(photoPath);
 		SaveImageUtil.save(bitmap, this);
-//		bitmap = ImageTreatmentUtil.resize(bitmap, 2550, 3300);
-//		bitmap.setDensity(300);
-		//bitmap.setDensity(500);
-		//bitmap = ImageTreatmentUtil.resize(bitmap, 1517, 2700);
-		 bitmap = ImageTreatmentUtil.imageConfig(bitmap,image, this, radioButton.getText().toString());
+		bitmap = ImageTreatmentUtil.imageConfig(bitmap,image, this, radioButton.getText().toString());
 		SaveImageUtil.save(bitmap, this);
 		TessBaseAPI baseApi = TesseractParametersUtil.create(CAMINHO_DADOS,
 				linguagem, bitmap,this);
